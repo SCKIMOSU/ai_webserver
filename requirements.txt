@@ -1,0 +1,13 @@
+# Django 웹 서버
+Django==4.2.7
+djangorestframework==3.14.0
+
+# 이미지 처리
+pillow==10.2.0
+
+# AI 모델 - PyTorch 기반
+torch==2.2.2
+torchvision==0.18.0
+
+# 선택 사항 (필요 시)
+numpy==1.24.4          # torchvision 의존성
