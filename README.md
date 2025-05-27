@@ -217,8 +217,6 @@ class PredictView(APIView):
 
 ---
 
----
-
 ## ✅ 전체 클래스 흐름 설명: 이미지 예측 API
 
 ```python
@@ -920,7 +918,7 @@ http://127.0.0.1:8080/api/predict/
 
 ---
 
-## ✅ 해결 방법: Postman에서 올바른 방식으로 이미지 전송
+## ✅ Postman에서 올바른 방식으로 이미지 전송
 
 ### 💡 아래와 같이 설정
 
@@ -984,8 +982,6 @@ class PredictView(APIView):
 curl -X POST -F "file=@test.jpg" http://127.0.0.1:8000/api/predict/
 
 ```
-
----
 
 ---
 
@@ -1227,5 +1223,56 @@ def load_model():
 | `model.pt` 없음 | 예제 모델 생성 또는 실제 모델 업로드 |
 | 경로 문제 가능성 | `load_model()`에서 `os.path`로 절대경로 추천 |
 | 테스트 목적이면 | dummy 모델 저장 코드 사용 |
+
+---
+
+## ✅ `model.pt`에서 `.pt`의 뜻은?
+
+### 🔹 `.pt` = **PyTorch**
+
+- `.pt`는 **PyTorch 모델 파일의 확장자**입니다.
+- `pt`는 **PyTorch**의 앞 글자입니다.
+
+---
+
+## ✅ 예시 확장자들
+
+| 확장자 | 의미 | 용도 |
+| --- | --- | --- |
+| `.pt` | PyTorch | 가장 일반적인 PyTorch 모델 저장 확장자 |
+| `.pth` | PyTorch | checkpoint 저장 등에도 많이 쓰임 |
+| `.ckpt` | checkpoint | (Lightning 등에서 자주 사용) |
+| `.onnx` | ONNX | PyTorch → ONNX 변환된 모델 |
+
+---
+
+## ✅ `.pt` vs `.pth` 차이점?
+
+- **둘 다 PyTorch 모델 저장용이며 의미 차이는 없음**.
+- 파일 이름은 사용자의 선택이므로 `.pt`, `.pth` 중 아무거나 써도 됨.
+- 예:
+    
+    ```python
+    torch.save(model.state_dict(), "model.pt")
+    torch.save(model.state_dict(), "model.pth")  # 동일하게 작동
+    
+    ```
+    
+
+---
+
+## ✅ PyTorch 모델 저장 방식 2가지
+
+| 저장 방식 | 내용 | 예 |
+| --- | --- | --- |
+| `state_dict` 저장 | 추천 방식모델 구조 따로 정의 필요 | ✅ `torch.save(model.state_dict(), 'model.pt')` |
+| 전체 모델 저장 | 모델 클래스까지 함께 저장불러올 때 클래스 필요 | ⚠️ `torch.save(model, 'model.pt')` |
+
+---
+
+## ✅ 결론
+
+- `.pt`는 **PyTorch의 약자**
+- **파일 확장자일 뿐이며** `torch.load()`로만 잘 불러올 수 있으면 `.pt`든 `.pth`든 문제 없음
 
 ---
